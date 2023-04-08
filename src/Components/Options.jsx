@@ -6,11 +6,13 @@ function Options({props,index}) {
 
   return (
     <div>
+      <ul className="list-group text-start">
       {answers.map(function(a){
         if (id === 1) {
-          return <li>{a.option}</li>
+          return <button className="list-group-item list-group-item-action">{a.id}. {a.option}</button>
         }
       })}
+      </ul>
     </div>
   );
 }

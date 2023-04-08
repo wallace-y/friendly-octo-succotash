@@ -111,11 +111,13 @@ function Question() {
 
   return (
     <div>
+      <div className="container w-50 text-center">
       <p>Question {currentQuestionId}</p>
       <p>{currentQuestion}</p>
       {quiz.map(function(q){
         return <Options props={q}/>
       })}
+      </div>
     </div>
   );
 }
