@@ -130,7 +130,7 @@ function Question() {
     <div>
       <div className="container w-50 text-center">
         {currentQuestion.id < 10 ? <>
-        <p>Question {currentQuestion.id}</p>
+        <h1 className="my-3">Question {currentQuestion.id}</h1>
         <p>{currentQuestion.question}</p>
 
         <ul className="list-group text-start">
