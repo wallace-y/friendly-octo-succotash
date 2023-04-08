@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Options from "./Options";
 
 function Question() {
   const quiz = [
