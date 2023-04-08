@@ -1,9 +1,10 @@
 import './App.css';
+import Question from './Components/Question';
 
 function App() {
   return (
     <div className="App">
-      <p>code here</p>
+      <Question/>
     </div>
   );
 }
