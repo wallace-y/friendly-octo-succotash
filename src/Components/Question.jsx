@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Options from "./Options";
 
 function Question() {
@@ -104,19 +104,42 @@ function Question() {
     ]
   }
   ]
-  let currentQuestionId = 1;
-  let currentQuestionIndex = currentQuestionId -1;
-  let currentQuestion = quiz[currentQuestionIndex].question
+  const [currentQuestion,setCurrentQuestion] = useState(
+    {
+    id: 1,
+    index: 0,
+    question: quiz[0].question,
+    currentOptions: quiz[0].options
+  })
   
+  let score = 0;
+  
+  function handleSelection(e) {
+    let result = e.target.value
+    if(result === "true") {
+      score++
+    }
+    let id = currentQuestion.id + 1
+    let index = currentQuestion.index + 1
+    let nextQuestion = quiz[index].question
+    let nextOptions = quiz[index].options
+    setCurrentQuestion({...currentQuestion,id:id,index: index,question: nextQuestion,currentOptions: nextOptions})
+  }
+
 
   return (
     <div>
       <div className="container w-50 text-center">
-      <p>Question {currentQuestionId}</p>
-      <p>{currentQuestion}</p>
-      {quiz.map(function(q){
-        return <Options props={q}/>
-      })}
+      <p>Question {currentQuestion.id}</p>
+      <p>{currentQuestion.question}</p>
+
+    <ul className="list-group text-start">
+        {currentQuestion.currentOptions.map(function(o) {
+
+        return <button  onClick={handleSelection} value={o.isCorrect} className="list-group-item list-group-item-action">{o.id}. {o.option}</button>
+
+        })}
+    </ul>
       </div>
     </div>
   );
