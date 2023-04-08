@@ -97,10 +97,10 @@ function Question() {
     id: 10,
     question: "Which of the following is not a programming language?",
     options: [
-      { id: 1, option: "Basketball", isCorrect: false },
-      { id: 2, option: "Soccer", isCorrect: false },
-      { id: 3, option: "Baseball", isCorrect: true },
-      { id: 4, option: "Football", isCorrect: false }
+      { id: 1, option: "Python", isCorrect: false },
+      { id: 2, option: "Ruby", isCorrect: false },
+      { id: 3, option: "HTML", isCorrect: true },
+      { id: 4, option: "Photoshop", isCorrect: false }
     ]
   }
   ]
@@ -111,13 +111,13 @@ function Question() {
     question: quiz[0].question,
     currentOptions: quiz[0].options
   })
-  
-  let score = 0;
-  
+  const [score,setScore] = useState(0);
+    
   function handleSelection(e) {
     let result = e.target.value
     if(result === "true") {
-      score++
+      let newScore = score + 1;
+      setScore(newScore)
     }
     let id = currentQuestion.id + 1
     let index = currentQuestion.index + 1
@@ -130,19 +130,34 @@ function Question() {
   return (
     <div>
       <div className="container w-50 text-center">
-      <p>Question {currentQuestion.id}</p>
-      <p>{currentQuestion.question}</p>
+        {currentQuestion.id < 10 ? <>
+        <p>Question {currentQuestion.id}</p>
+        <p>{currentQuestion.question}</p>
 
-    <ul className="list-group text-start">
-        {currentQuestion.currentOptions.map(function(o) {
+        <ul className="list-group text-start">
+            {currentQuestion.currentOptions.map(function(o) {
+            
+            return <button  onClick={handleSelection} value={o.isCorrect} className="list-group-item list-group-item-action">{o.id}. {o.option}</button>
+            
+            })}
+        </ul>
+        </> : <h1>You scored {score} out of 10.</h1>}
 
-        return <button  onClick={handleSelection} value={o.isCorrect} className="list-group-item list-group-item-action">{o.id}. {o.option}</button>
-
-        })}
-    </ul>
       </div>
     </div>
   );
 }
 
 export default Question;
+
+
+        {/* <p>Question {currentQuestion.id}</p>
+        <p>{currentQuestion.question}</p>
+
+        <ul className="list-group text-start">
+            {currentQuestion.currentOptions.map(function(o) {
+            
+            return <button  onClick={handleSelection} value={o.isCorrect} className="list-group-item list-group-item-action">{o.id}. {o.option}</button>
+            
+            })}
+        </ul> */}
